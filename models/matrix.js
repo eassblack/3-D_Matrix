@@ -9,5 +9,10 @@ var matrixSchema = new Schema({
   w:  { type:  Number } 
 });
 
-module.exports = mongoose.model('matrix', matrixSchema);
+var infoMatrixSchema =new Schema({
+	id: { type: String },
+  	w:  { type:  Number }  
+});
 
+module.exports = mongoose.model('matrix', matrixSchema);
+module.exports = mongoose.model('infoMatrix', matrixSchema);

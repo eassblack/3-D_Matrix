@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const async = require('async');
 
 const Matrix = mongoose.model('matrix');
+const InfoMatrix = mongoose.model('infoMatrix');
 
 exports.operateMatrix = function(req, res) {
 	let sum = 0
@@ -139,9 +140,21 @@ exports.createMatrix = function(req, res) {
 	  		var msj = {'error': "Imposible to create new matrix."};
 			res.status(404).json(msj);
 	  	}else{
-	  		var msj = {'Result': {'msj':"Matrix "+req.body.n+"*"+req.body.n+" Created.",
-							'id':id}};
-    		res.status(200).json(msj);
+	  		let n = req.body.n
+	  		const infoMatrix = new InfoMatrix({
+		      id: id,
+		      w: n
+		    });
+		    console.log(infoMatrix)
+		    infoMatrix.save((error, newValue) => {
+  				if (error) {
+			  		var msj = {'error': "Imposible to create new matrix."};
+					res.status(404).json(msj);
+  				}
+		  		var msj = {'Result': {'msj':"Matrix "+req.body.n+"*"+req.body.n+" Created.",
+								'id':id}};
+	    		res.status(200).json(msj);
+  			});
 	  	}
 	  }
 	);
