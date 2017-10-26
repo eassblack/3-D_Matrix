@@ -21,7 +21,8 @@ var matrixController = require('./controllers/3-D_matrix');
 var matrix = express.Router();
 
 matrix.route('/matrix')
-  .post(matrixController.createMatrix);
+  .post(matrixController.createMatrix)
+  .get(matrixController.getMatrix);
 
 matrix.route('/matrix/:id')
   .put(matrixController.updateMatrix)

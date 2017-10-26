@@ -8,16 +8,16 @@ const InfoMatrix = mongoose.model('infoMatrix');
 exports.operateMatrix = function(req, res) {
 	let sum = 0
 	var vecI = [], vecJ = [], vecZ = [];
-		for (var i = req.body.x1-1; i < req.body.x2 ; i++) {
-			vecI[i] = i
-			for (var j = req.body.y1-1; j < req.body.y2; j++) {
-				vecJ[j] = j
-				for (var z = req.body.z1-1; z < req.body.z2; z++) {
-					vecZ[z] = z
-				}
-			}
-		}
-		
+	for (var i = req.body.x1-1; i < req.body.x2 ; i++) {
+		vecI.push(i);
+	}
+	for (var j = req.body.y1-1; j < req.body.y2; j++) {
+		vecJ.push(j);
+	}
+	for (var z = req.body.z1-1; z < req.body.z2; z++) {
+		vecZ.push(z);
+	}
+
 	async.each(vecI,
 	  function(i, callbackI){
 	  	async.each(vecJ,
@@ -29,6 +29,7 @@ exports.operateMatrix = function(req, res) {
 				        	callbackZ(err);
 				    	}
 				    	if (value != null){
+				    		console.log(value.w)
 				    		sum += value.w;
 				    		callbackZ();
 				    	}else{
@@ -160,3 +161,15 @@ exports.createMatrix = function(req, res) {
 	);
 
 };
+
+exports.getMatrix = function(req, res) {
+	InfoMatrix.find({},function(err, value) {
+        if(err){
+        	var msj = {'error': "Imposible to return matrix info."};
+			res.status(404).json(msj);
+    	}
+    	var msj = {'Result': {'matrixes': value }};
+		res.status(200).json(msj);
+		    		
+    	});
+	};
