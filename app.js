@@ -1,20 +1,41 @@
 var express = require("express"),
     app = express(),
     bodyParser  = require("body-parser"),
-    methodOverride = require("method-override");
+    methodOverride = require("method-override"),
+    mongoose        = require('mongoose');
+
+// Connection to DB
+mongoose.connect('mongodb://localhost:27017/DBmatrix', function(err, res) {
+  if(err) throw err;
+  console.log('Connected to Database');
+});
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(methodOverride());
 
-var router = express.Router();
+var models = require('./models/matrix')(app, mongoose);
+var matrixController = require('./controllers/3-D_matrix');
 
-router.get('/', function(req, res) {
-   res.send("Hello World!");
+app.use(express.static(__dirname + '/html'));
+
+// API routes
+var matrix = express.Router();
+
+matrix.route('/matrix')
+  .post(matrixController.createMatrix)
+  .get(matrixController.getMatrix);
+
+matrix.route('/matrix/:id')
+  .put(matrixController.updateMatrix)
+  .post(matrixController.operateMatrix);
+
+app.get('/',function(req,res){
+  res.sendFile('index.html');
 });
 
-app.use(router);
+app.use(matrix);
 
 app.listen(3000, function() {
-  console.log("Node server running on http://localhost:3000");
-});
+    console.log("Node server running on http://localhost:3000");
+  });

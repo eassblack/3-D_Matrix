@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+	
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<title>3D Matrix</title>
+  	
+  	<!--Import materialize.css-->
+  	<link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/>
+  	<link rel="stylesheet" href="css/font-awesome.min.css">
+  	<link type="text/css" rel="stylesheet" href="css/estilo.css"  media="screen,projection"/>
+     <link rel="stylesheet" type="text/css" href="css/sweetalert.css">
+  	<link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/estilo.css">
+</head>
+
+<body>
+
+
+	<div class="nav-fixed">
+	    <nav class="header">
+	      <div class="nav-wrapper">
+	        <a class="brand-logo center">3D Matrix</a>
+	      </div>
+	      <a href="index.html" class="btn-floating"><i class="fa fa-arrow-left"></i></a>
+	    </nav>
+	</div>
+
+  <div id="loader-wrapper">
+      <div id="loader"></div>
+
+      <div class="loader-section section-left"></div>
+            <div class="loader-section section-right"></div>
+
+  </div>
+
+	<div class="container">
+		<h5>Actualizar valor</h5>
+      
+      <div class="row ejemplo">
+    		<div class="input-field col s12">
+
+      			<i class="fa fa-plus-circle prefix"></i>
+      			<input id="x" type="number" class="validate" min=1 max=100 required>
+      			<label for="x">Ingrese coordenada X:</label>
+    		</div>
+      </div>
+      <div class="row ejemplo">
+        <div class="input-field col s12">
+
+            <i class="fa fa-plus-circle prefix"></i>
+            <input id="y" type="number" class="validate" min=1 max=100 required>
+            <label for="y">Ingrese coordenada Y:</label>
+        </div>
+      </div>
+      <div class="row ejemplo">
+        <div class="input-field col s12">
+
+            <i class="fa fa-plus-circle prefix"></i>
+            <input id="z" type="number" class="validate" min=1 max=100 required>
+            <label for="z">Ingrese coordenada Z:</label>
+        </div>
+      </div>
+      <div class="row ejemplo">
+        <div class="input-field col s12">
+
+            <i class="fa fa-plus-circle prefix"></i>
+            <input id="w" type="number" class="validate" min=-1000000000 max=1000000000 required>
+            <label for="w">Ingrese nuevo valor:</label>
+        </div>
+      </div>
+      <div class="row">
+          <div class=" col-s12 center-align">
+            <button class="btn waves-effect waves-light " type="button" id="updateButton" name="action">Actualizar</button>
+          </div>
+        </div>
+      <h5>Operar matrix</h5>
+      
+      <div class="row ejemplo">
+        <div class="input-field col s12">
+
+            <i class="fa fa-plus-circle prefix"></i>
+            <input id="x1" type="number" class="validate" min=1 max=100 required>
+            <label for="x1">Ingrese coordenada X1:</label>
+        </div>
+      </div>
+      <div class="row ejemplo">
+        <div class="input-field col s12">
+
+            <i class="fa fa-plus-circle prefix"></i>
+            <input id="x2" type="number" class="validate" min=1 max=100 required>
+            <label for="x2">Ingrese coordenada X2:</label>
+        </div>
+      </div>
+      <div class="row ejemplo">
+        <div class="input-field col s12">
+
+            <i class="fa fa-plus-circle prefix"></i>
+            <input id="y1" type="number" class="validate" min=1 max=100 required>
+            <label for="y1">Ingrese coordenada Y1:</label>
+        </div>
+      </div>
+      <div class="row ejemplo">
+        <div class="input-field col s12">
+
+            <i class="fa fa-plus-circle prefix"></i>
+            <input id="y2" type="number" class="validate" min=1 max=100 required>
+            <label for="y2">Ingrese coordenada Y2:</label>
+        </div>
+      </div>
+      <div class="row ejemplo">
+        <div class="input-field col s12">
+
+            <i class="fa fa-plus-circle prefix"></i>
+            <input id="z1" type="number" class="validate" min=1 max=100 required>
+            <label for="z1">Ingrese coordenada Z1:</label>
+        </div>
+      </div>
+      <div class="row ejemplo">
+        <div class="input-field col s12">
+
+            <i class="fa fa-plus-circle prefix"></i>
+            <input id="z2" type="number" class="validate" min=1 max=100 required>
+            <label for="z2">Ingrese coordenada Z2:</label>
+        </div>
+      </div>
+      <div class="row">
+          <div class=" col-s12 center-align">
+            <button class="btn waves-effect waves-light " type="button" id="queryButton" name="action">Resultado</button>
+          </div>
+        </div>
+  
+  </div>
+
+
+
+	<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="js/materialize.min.js"></script>
+  <script type="text/javascript" src="js/preload.js"></script>  
+  <script src="js/sweetalert.min.js"></script>
+  <script type="text/javascript" src="js/app/queryMatrix.js"></script>
+   
+  
+  <script type="text/javascript">
+
+ $(document).ready(function(){
+    var altura=Number($(window).height()-125);
+    $(".container").css("min-height",altura+"px");
+    quitarLoader();
+
+    $('#updateButton').click(function() {
+      if ($('#x').val()!="" || $('#y').val()!="" || $('#z').val()!="" || $('#w').val()!=""){
+      updateValue($('#x').val(),$('#y').val(),$('#z').val(),$('#w').val());
+    }else{
+      swal("¡Disculpe!","Debe ingresar todos los campos.");
+    }
+    });
+
+    $('#queryButton').click(function() {
+      if ($('#x1').val()!="" || $('#x2').val()!="" || $('#y1').val()!="" || $('#y2').val()!="" || $('#z1').val()!="" || $('#z2').val()!=""){
+        queryMatrix($('#x1').val(),$('#x2').val(),$('#y1').val(),$('#y2').val(),$('#z1').val(),$('#z2').val());
+      }else{
+        swal("¡Disculpe!","Debe ingresar todos los campos.");
+      }
+    });
+  });
+
+ </script>
+</body>
+</html>
