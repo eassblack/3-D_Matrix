@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+	
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<title>3D Matrix</title>
+  	
+  	<!--Import materialize.css-->
+  	<link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/>
+  	<link rel="stylesheet" href="css/font-awesome.min.css">
+  	<link type="text/css" rel="stylesheet" href="css/estilo.css"  media="screen,projection"/>
+    <link rel="stylesheet" type="text/css" href="css/sweetalert.css">
+  	<link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/estilo.css">
+</head>
+
+<body>
+
+
+	<div class="nav-fixed">
+	    <nav class="header">
+	      <div class="nav-wrapper">
+	        <a class="brand-logo center">3D Matrix</a>
+	      </div>
+	      <a href="index.html" class="btn-floating"><i class="fa fa-arrow-left"></i></a>
+	    </nav>
+	</div>
+
+  <div id="loader-wrapper">
+      <div id="loader"></div>
+
+      <div class="loader-section section-left"></div>
+            <div class="loader-section section-right"></div>
+
+  </div>
+
+	<div class="container">
+		<h5>Crear Matrix</h5>
+      
+      <div class="row ejemplo">
+    		<div class="input-field col s12">
+
+      			<i class="fa fa-plus-circle prefix"></i>
+      			<input id="n" type="number" class="validate" min=1 max=100 required>
+      			<label for="n">Ingrese valor de N:</label>
+    		</div>
+        <p>Rango: 1-100</p>
+      </div>
+
+      <div class="row">
+          <div class=" col-s12 center-align">
+            <button class="btn waves-effect waves-light " type="button" id="action" name="action">Crear</button>
+          </div>
+        </div>
+
+    <div class="row ayuda">
+      <div class=" col-s12 center-align caja-ayuda ">
+
+          <p >
+            Ingresa un numero "N" entre 1-100 para crear una matrix de NxNxN.
+          </p>
+
+      </div>
+    </div>
+
+  
+  </div>
+
+
+
+	<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="js/materialize.min.js"></script>
+  <script type="text/javascript" src="js/preload.js"></script>  
+  <script src="js/sweetalert.min.js"></script>
+  <script type="text/javascript" src="js/app/createMatrixC.js"></script>
+   
+  
+  <script type="text/javascript">
+
+ $(document).ready(function(){
+          
+    var altura=Number($(window).height()-125);
+    $(".container").css("min-height",altura+"px");
+    quitarLoader();
+
+    $('#action').click(function() {
+      crearMatrix($('#n').val());
+    });
+  });
+
+ </script>
+</body>
+</html>

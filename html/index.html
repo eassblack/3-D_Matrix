@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<title>3D Matrix</title>
+  	<!--Import materialize.css-->
+  	<link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/>
+  	<link rel="stylesheet" href="css/font-awesome.min.css">
+  	<link type="text/css" rel="stylesheet" href="css/estilo.css"  media="screen,projection"/>
+  	<link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/estilo.css">
+</head>
+
+<body>
+
+	<!-- Start Page Loading -->
+
+ 	<div id="loader-wrapper">
+		<div id="loader"></div>
+		<div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+	</div>
+	<!-- End Page Loading -->
+	<div class="nav-fixed">
+	    <nav class="header">
+	      <div class="nav-wrapper">
+	        <a class="brand-logo center">3D Matrix</a>
+	      </div>
+	    </nav>
+	</div>
+
+	<div class="container">
+		<h5>Listado de matrices</h5>
+		<div class="row menu-AdministrarC">
+			<div class="col s12">
+				<ul id="listMatrix">
+				    <li>
+						<a href="createMatrix.html"><div class="waves-effect waves-gray">
+				      		<p>Crear Matrix</p>
+				      		<i class="fa fa-angle-right"></i>
+				      	</div></a>
+
+				    </li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+	<script type="text/javascript" src="js/preload.js"></script>
+  	<script src="js/sweetalert.min.js"></script>
+  	<script type="text/javascript" src="js/app/loadMatrix.js"></script>
+    <script type="text/javascript">
+
+   $(document).ready(function(){
+       var altura=Number($(window).height()-125);
+        $(".container").css("min-height",altura+"px");
+        getMatrix();
+    });
+ </script>
+</body>
+</html>

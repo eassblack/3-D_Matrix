@@ -17,6 +17,8 @@ app.use(methodOverride());
 var models = require('./models/matrix')(app, mongoose);
 var matrixController = require('./controllers/3-D_matrix');
 
+app.use(express.static(__dirname + '/html'));
+
 // API routes
 var matrix = express.Router();
 
@@ -27,6 +29,10 @@ matrix.route('/matrix')
 matrix.route('/matrix/:id')
   .put(matrixController.updateMatrix)
   .post(matrixController.operateMatrix);
+
+app.get('/',function(req,res){
+  res.sendFile('index.html');
+});
 
 app.use(matrix);
 
