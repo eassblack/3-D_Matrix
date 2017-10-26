@@ -1,6 +1,6 @@
 # 3-D_Matrix
 
-Resumen del proyecto: El proyecto fue desarollado usando una base de datos en mongoDB, y una API REST en express para poder interactuar con la base de datos.Tambien funcion para retornar las vistas para usar el proyecto como tal.
+Resumen del proyecto: El proyecto fue desarollado usando una base de datos en mongoDB, y una API REST en express para poder interactuar con la base de datos.Tambien funcion para retornar las vistas del proyecto como tal.
 
 Con fines de poner en prueba lo desarrollado se ejecuto dicho proyecto en una instancia EC2 de AWS.
 
